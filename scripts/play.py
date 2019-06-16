@@ -1,11 +1,13 @@
 import numpy as np
 
-from utils import check_if_board_is_full, get_winner, minimax
+from utils import check_if_board_is_full, get_winner, negamax_alpa_beta_pruned
 
 human_player = int(input('Do you want to play as the first [1] or as the second [-1] player?\n'))
 computer_player = 1 if human_player == -1 else -1
 
-board = np.zeros(shape=(3, 3))
+size = 3
+
+board = np.zeros(shape=(size, size))
 
 print(f'\nInitial state of the board:\n{board}\n')
 
@@ -29,14 +31,14 @@ if human_player == 1:
             print('You won!')
             break
 
-        if check_if_board_is_full(board):
+        if check_if_board_is_full(board, size):
             print('Draw!')
             break
 
         break
 
 while True:
-    computer_move = minimax(board, computer_player)['move']
+    computer_move = negamax_alpa_beta_pruned(board, computer_player, -np.inf, np.inf)['move']
     row = computer_move[0]
     col = computer_move[1]
     board[row, col] = computer_player
@@ -48,7 +50,7 @@ while True:
         print('You lost!')
         break
 
-    if check_if_board_is_full(board):
+    if check_if_board_is_full(board, size):
         print('Draw!')
         break
 
@@ -70,6 +72,6 @@ while True:
         print('You won!')
         break
 
-    if check_if_board_is_full(board):
+    if check_if_board_is_full(board, size):
         print('Draw!')
         break
