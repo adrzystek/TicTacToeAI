@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from scripts.utils import check_if_board_is_full, get_winner, negamax, negamax_alpa_beta_pruned
+from scripts.utils import check_if_board_is_full, get_winner, negamax, negamax_alpha_beta_pruned
 
 board0 = np.zeros(shape=(3, 3))
 board1 = np.array([[-1, 0, 1], [1, 0, 0], [1, -1, -1]])
@@ -103,10 +103,10 @@ def test_negamax_whether_predicts_result(board, player, expected):
     (board4, 1, 1),
     (board5, 1, -1),
 ])
-def test_negamax_alpa_beta_pruned_whether_predicts_result(board, player, expected):
-    # watch out! the negamax_alpa_beta_pruned function returns the results from the perspective
+def test_negamax_alpha_beta_pruned_whether_predicts_result(board, player, expected):
+    # watch out! the negamax_alpha_beta_pruned function returns the results from the perspective
     # of the player to play, so that a line `(board1, -1, 1)` expects player "-1" to win
-    assert negamax_alpa_beta_pruned(board, player, -np.inf, np.inf)['score'] == expected
+    assert negamax_alpha_beta_pruned(board, player, -np.inf, np.inf)['score'] == expected
 
 
 @pytest.mark.parametrize("board, player, expected", [
@@ -123,5 +123,5 @@ def test_negamax_plays_proper_move(board, player, expected):
     (board2, 1, [(0, 1)]),
     (board2, -1, [(2, 0), (0, 1)]),
 ])
-def test_negamax_alpa_beta_pruned_plays_proper_move(board, player, expected):
-    assert negamax_alpa_beta_pruned(board, player, -np.inf, np.inf)['move'] in expected
+def test_negamax_alpha_beta_pruned_plays_proper_move(board, player, expected):
+    assert negamax_alpha_beta_pruned(board, player, -np.inf, np.inf)['move'] in expected

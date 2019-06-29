@@ -1,6 +1,6 @@
 import numpy as np
 
-from utils import check_if_board_is_full, get_winner, negamax_alpa_beta_pruned
+from utils import check_if_board_is_full, get_winner, negamax_alpha_beta_pruned
 
 human_player = int(input('Do you want to play as the first [1] or as the second [-1] player?\n'))
 computer_player = 1 if human_player == -1 else -1
@@ -38,7 +38,7 @@ if human_player == 1:
         break
 
 while True:
-    computer_move = negamax_alpa_beta_pruned(board, computer_player, -np.inf, np.inf)['move']
+    computer_move = negamax_alpha_beta_pruned(board, computer_player, -np.inf, np.inf)['move']
     row = computer_move[0]
     col = computer_move[1]
     board[row, col] = computer_player

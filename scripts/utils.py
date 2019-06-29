@@ -3,7 +3,7 @@ from typing import Dict, Optional
 import numpy as np
 
 
-def negamax_alpa_beta_pruned(
+def negamax_alpha_beta_pruned(
         board: np.ndarray,
         player: int,
         alpha: np.float,
@@ -38,7 +38,7 @@ def negamax_alpa_beta_pruned(
         if board[row, col] == 0:
             copied_board = board.copy()
             copied_board[row, col] = player
-            result = negamax_alpa_beta_pruned(copied_board, -player, -beta, -alpha)
+            result = negamax_alpha_beta_pruned(copied_board, -player, -beta, -alpha)
             score = -result['score']
             if score > best_score:
                 best_score = score
